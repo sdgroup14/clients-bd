@@ -1,45 +1,23 @@
-(function() {
-  'use strict';
-
-  angular
-    .module('espot', [
-      'ui.router',
-      'ngAnimate',
-      'espot.index',
-      'espot.search',
-      'espot.kitchen',
-      'espot.kitchen-result',
-      'espot.kitchen-list',
-      'espot.special-offers',
-      'espot.institution',
-      'espot.map',
-      'espot.institution-info',
-      'espot.institution-menu',
-      'espot.institution-map',
-      'espot.institution-reviews'
-    ])
-    .controller('AppCtrl', AppCtrl)
-    .config(Config);
-
-
-  AppCtrl.$inject = ['$scope', '$rootScope', '$timeout', '$transitions'];
-
-  function AppCtrl($scope, $rootScope, $timeout, $transitions) {
+// $('option').on('click', function () {
+//     console.log('123');
+//    $('.select-arr').css('transform', 'rotate(0deg)')
+// });
+// $('.top-select').on('click',  (function(e) {
+//     e.stopPropagation();
+//     console.log('123');
+//     $('.select-arr').css('transform', '180deg')
+// }));
+//
+// $('select').on('change',  (function() {
+//     console.log('123');
+//     $('.select-arr').css('transform', '0deg')
+// }));
 
 
 
-  };
 
-  Config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-
-  function Config($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/');
-    $stateProvider
-      .state('root', {
-        url: '/',
-        controller: AppCtrl,
-        redirectTo: 'index',
-      });
-  };
-
-})();
+// $('body').on('click', '.top-select', function (e) {
+//     if (e.target == $(this)[0]) {
+//         $('.select-arr').css('transform', 'rotate(0deg)')
+//     }
+// });

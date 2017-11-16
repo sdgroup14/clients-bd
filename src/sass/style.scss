@@ -69,9 +69,8 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 24px;
 }
-
-
 
 .add-item {
 	min-width: 47px;
@@ -138,17 +137,15 @@ body {
 		position: absolute;
 		top: 50%;
 		margin-top: -3px;
-		right:12px;
+		right: 12px;
 		border-style: solid;
 		border-width: 7px 7px 0 7px;
 		border-color: #d5d7e3 transparent transparent transparent;
-		transform: rotate(0deg);
-		transition: transform .25s ease-in-out;
+		//transform: rotate(0deg);
+		//transition: transform .25s ease-in-out;
 	}
 	
-
-	
-	&:last-of-type{
+	&:last-of-type {
 		max-width: 180px;
 	}
 }
@@ -172,17 +169,89 @@ body {
 	font-size: 16px;
 	color: #B5B7C2;
 	
-	&:focus ~ .select-arr{
-		transform: rotate(180deg);
-	}
-	&:not(:focus) ~ .select-arr{
-		transform: rotate(0deg);
-	}
-	
+	//&:focus ~ .select-arr {
+	//	transform: rotate(180deg);
+	//}
+	//&:not(:focus) ~ .select-arr {
+	//	transform: rotate(0deg);
+	//}
 }
 
 .top-select select::-ms-expand {
 	display: none; /* remove arrow IE     */
+}
+
+.db-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 10px 8px;
+}
+
+.db-table-header {
+	margin-bottom: 8px;
+	font-family: Arial;
+	font-size: 14px;
+	color: #B1B3BD;
+}
+
+.db-row-content {
+	min-height: 61px;
+	background-color: #fff;
+	border-radius: 3px;
+}
+
+.db-col {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	
+	&:first-of-type {
+		max-width: 370px;
+	}
+}
+
+.db-item-header {
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 16px;
+	color: #67686E;
+	margin-bottom: 10px;
+}
+
+.subdivisions {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.sd-it {
+	font-family: Arial;
+	font-size: 12px;
+	color: #67686E;
+	background-color: #E6E8F0;
+	border-radius: 3px;
+	height: 19px;
+	padding: 0 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px 5px 0;
+}
+
+.company-email {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	
+	svg {
+		width: 12px;
+		height: 15px;
+		fill: #B1B3BD;
+	}
 }
 
 //@import "content/templates/header";
