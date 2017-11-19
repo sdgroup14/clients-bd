@@ -43,11 +43,24 @@ class ContactsModel
         }
     }
 
+    public static function getTagName ($id)
+    {
+        $db = new DB;
+        $db->setClassName(get_called_class());
+        $sql = 'SELECT idtags AS id, tag_name FROM websummit.tags WHERE idtags IN (' . $id . ')';
+        $res = $db->query($sql);
+        if (empty($res)) {
+            return false;
+        } else {
+            return $res;
+        }
+    }
+
     public static function insertContact ($data)
     {
-        $sql = 'INSERT INTO ' . static::$table . ' (title,site,email,country,type) VALUES (:title,:site,:email,:country,:type)';
+        $sql = 'INSERT INTO ' . static::$table . ' (title,site,email,country,type,tags) VALUES (:title,:site,:email,:country,:type,:tags)';
         $db = new DB;
-        return $db->execute($sql, [':title' => $data->title,':site' => $data->site,':email' => $data->email,':country' => $data->country,':type' => $data->type]);
+        return $db->execute($sql, [':title' => $data->title,':site' => $data->site,':email' => $data->email,':country' => $data->country,':type' => $data->type,':tags' => $data->tags]);
     }
 
     public static function addTagContact ($id_tag, $id_contact)

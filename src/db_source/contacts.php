@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } else {
             echo 0;
         }
-
     }
 
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -46,13 +45,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $new->email = $data->email;
         $new->country = $data->country;
         $new->type = $data->desc;
-        $data->tags = explode(',', $data->tags);
+
+        $tags = ContactsModel::getTagName($data->tags);
+
+        $t = [];
+        $i = 0;
+        foreach ($tags as $k) {
+            array_push($t, '{"id":' . $k->id . ',"name":"' . $k->data['tag_name'] . '"}');
+        }
+        $new->tags = implode(',',$t);
+
         $id_contact = ContactsModel::insertContact($new);
         if ($id_contact) {
+            $data->tags = explode(',', $data->tags);
             foreach ($data->tags as $k => $v) {
                 ContactsModel::addTagContact($v,$id_contact);
             }
-            echo $id_contact;
+            $contact = ContactsModel::getContact($id_contact);
+            if ($contact) {
+                $data = [];
+                $data['id'] = $contact->id;
+                $data['title'] = $contact->data['title'];
+                $data['site'] = $contact->data['site'];
+                $data['email'] = $contact->data['email'];
+                $data['country'] = $contact->data['country'];
+                $data['type'] = $contact->data['type'];
+                $data['tags'] = $contact->data['tags'];
+                exit(json_encode($data));
+            } else {
+                echo 0;
+            }
         } else {
             echo 0;
         }
