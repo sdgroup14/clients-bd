@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="clients_db">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="format-detection" content="telephone=no">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0">
 	<meta http-equiv="cleartype" content="on">
+	<script src="js/libs/jquery.min.js"></script>
+	<script src="js/libs/angular.min.js"></script>
+	<!--<script src="js/libs/modules/angular-ui-router.min.js"></script>-->
+	<script src="js/app.js"></script>
+
 
 	<!-- build:remove -->
 	<link href="css/style.css" rel="stylesheet">
@@ -16,7 +21,7 @@
 	<title></title>
 </head>
 
-<body>
+<body ng-controller="AppCtrl">
 <div class="content">
 	<section class="top">
 		<button class="add-item">+</button>
@@ -178,27 +183,31 @@
 	</section>
 	<section class="form">
 		<div class="form-wrapper">
-			<form action="">
+			<form action="" name="companyForm">
 				<div class="form-container">
 					<div class="form-container-col">
-						<input type="text" name="Title" id="" placeholder="Title"/> <input type="text" name="Title" id="" placeholder="Site"/>
+						<input type="text" name="Title" placeholder="Title" ng-model="company.title"/>
+						<input type="text" name="Title" placeholder="Site" ng-model="company.site"/>
 						<div class="f-container-common">
-							<input type="text" name="Title" id="" placeholder="Tags"/>
-							<div class="inp-tags-result">
-								<div class="choosen-tag">
-									<span>приложение</span>
-									<div class="choosen-tag-del"></div>
+							<div class="tag-inp-wrapper">
+								<input type="text" name="Title" id="" placeholder="Tags" class="search-tags-inp" ng-model="searchTags" ng-click="showTagsContainer()" autocomplete="off"/>
+								<div class="dropdown-tags-add" ng-show="tagsAddShow" ng-click="addTagToDb()">добавить новый</div>
+								<div class="dropdown-tags" ng-show="tagsContainerShow">
+									<div class="dropdown-tags-it" ng-click="addTagToForm(tag.name, tag.id)" ng-repeat="tag in tags | filter:searchTags" tag-id="{{tag.id}}">{{tag.name}}</div>
 								</div>
-
+							</div>
+							<div class="inp-tags-result">
 							</div>
 						</div>
 					</div>
 					<div class="form-container-col">
-						<input type="text" name="Title" id="" placeholder="Country"/> <input type="text" name="Title" id="" placeholder="Email"/> <textarea name="" id="" cols="" rows="" placeholder="About"></textarea>
+						<input type="text" name="Title" id="" placeholder="Country" ng-model="company.country"/>
+						<input type="text" name="Title" id="" placeholder="Email" ng-model="company.email"/>
+						<textarea name="" id="" cols="" rows="" placeholder="About" ng-model="company.desc"></textarea>
 					</div>
 				</div>
 				<div class="form-btns">
-					<button class="form-add">add & next</button>
+					<button class="form-add" type="submit" ng-click="save($event, company, companyForm)">add & next</button>
 					<button class="form-cancel">cancel</button>
 				</div>
 			</form>
@@ -206,9 +215,8 @@
 	</section>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- build:remove -->
-<script src="js/events.js"></script>
+<!--<script src="js/events.js"></script>-->
 <!-- /build -->
 <!-- build:include ../templates/js-script.html -->
 <!-- /build -->

@@ -502,8 +502,7 @@ textarea {
   border-radius: 3px;
   padding: 14px 0 0;
   max-width: 900px;
-  margin: 0 auto;
-  overflow: hidden; }
+  margin: 0 auto; }
 
 .form-container-col {
   width: 410px;
@@ -568,11 +567,75 @@ textarea {
   .choosen-tag-del:before {
     transform: translate(-50%, -50%) rotate(-45deg); }
 
+.tag-inp-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+  border: 1px solid #d5d7e3;
+  border-radius: 3px;
+  min-height: 36px; }
+  .tag-inp-wrapper input {
+    margin-bottom: 0;
+    border: 0;
+    border-radius: 0; }
+
+.dropdown-tags {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  width: 100%;
+  z-index: 99;
+  max-height: 175px;
+  overflow: hidden;
+  border: 1px solid #d5d7e3;
+  border-radius: 3px; }
+
+.dropdown-tags-it {
+  position: relative;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  background-color: #fff;
+  font-family: Arial;
+  font-size: 16px;
+  color: #838590;
+  cursor: pointer; }
+  .dropdown-tags-it:hover {
+    background-color: #d5d7e3;
+    color: #fff; }
+  .dropdown-tags-it:before {
+    display: block;
+    content: '+';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    font-size: 16px;
+    line-height: 16px;
+    transform: translateY(-50%); }
+
+.dropdown-tags-add {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #61cf7e;
+  height: 38px;
+  line-height: 38px;
+  z-index: 10;
+  text-align: center;
+  font-family: Arial;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0 10px; }
+
 .form-btns {
   margin-top: 14px;
   display: flex;
   justify-content: flex-start;
-  align-items: center; }
+  align-items: center;
+  border-radius: 0 0 3px 3px;
+  overflow: hidden; }
   .form-btns button {
     height: 35px;
     opacity: .8; }

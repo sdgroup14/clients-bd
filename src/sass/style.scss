@@ -147,8 +147,6 @@ textarea {
 	}
 }
 
-
-
 .top-select {
 	position: relative;
 	max-width: 320px;
@@ -209,10 +207,10 @@ textarea {
 	display: none; /* remove arrow IE     */
 }
 
-
 .db-item {
 	padding: 0 30px 0 40px;
 }
+
 .db-table-content-box {
 	max-height: 250px;
 	overflow: auto;
@@ -362,9 +360,9 @@ textarea {
 		background: #FFFFFF;
 		border-radius: 3px;
 		padding: 14px 0 0;
-		max-width:900px;
+		max-width: 900px;
 		margin: 0 auto;
-		overflow: hidden;
+		//overflow: hidden;
 	}
 }
 
@@ -388,12 +386,10 @@ textarea {
 	textarea {
 		resize: none;
 		height: 90px;
-		padding:10px 20px 10px 7px;
+		padding: 10px 20px 10px 7px;
 	}
 	
 }
-
-
 
 .inp-tags-result {
 	display: flex;
@@ -458,15 +454,108 @@ textarea {
 		transform: translate(-50%, -50%) rotate(-45deg);
 		//margin-left:-1px;
 	}
+}
+
+.tag-inp-wrapper {
+	position: relative;
+	margin-bottom: 12px;
+	
+	//margin: 0 0 0 20px;
+	border: 1px solid #d5d7e3;
+	border-radius: 3px;
+	min-height: 36px;
+	//background-color: #fff;
+	//padding: 0 20px 0 7px;
+	//font-family: Arial;
+	//font-size: 16px;
+	//color: #838590;
+	//overflow: hidden;
 	
 	
+	
+	input {
+		margin-bottom: 0;
+		border: 0;
+		border-radius: 0;
+		
+		//&:focus {
+		//	& + .dropdown-tags {
+		//		display: block;
+		//	}
+		//}
+	}
+}
+
+.dropdown-tags {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	width: 100%;
+	z-index:99;
+	max-height: 175px;
+	overflow: hidden;
+	border: 1px solid #d5d7e3;
+	//display: none;
+	border-radius: 3px;
+}
+
+.dropdown-tags-it {
+	position: relative;
+	//border: 1px solid #d5d7e3;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	padding-left: 30px;background-color: #fff;
+		font-family : Arial;
+		font-size : 16px;
+		color : #838590;
+	cursor: pointer;
+	
+	&:hover {
+		background-color: #d5d7e3;
+		color: #fff;
+		
+		
+	}
+	
+	
+	&:before {
+		display: block;
+		content: '+';
+		position: absolute;
+		left: 10px;
+		top: 50%;
+		font-size:16px;
+		line-height:16px;
+		transform: translateY(-50%);
+	}
+}
+
+.dropdown-tags-add {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: #61cf7e;
+	height: 38px;
+	line-height: 38px;
+	z-index:10;
+	text-align: center;
+	font-family : Arial;
+	font-size : 16px;
+	color : #ffffff;
+	cursor: pointer;
+	padding: 0 10px;
+	//display: none;
 }
 
 .form-btns {
-	margin-top:14px;
+	margin-top: 14px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	border-radius:0 0 3px 3px;
+	overflow: hidden;
 	
 	button {
 		height: 35px;
@@ -483,10 +572,10 @@ textarea {
 	width: 132px;
 	background-color: #d0d2d9;
 }
+
 .form-add {
 	flex: 1 0 auto;
 	background-color: #83c98a;
 }
-
 
 //@import "content/templates/header";
