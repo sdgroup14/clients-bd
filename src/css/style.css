@@ -263,7 +263,12 @@ body {
   min-height: 506px; }
 
 .content {
-  padding: 40px 0; }
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  height: 100%; }
 
 .container {
   padding: 0 6px;
@@ -274,7 +279,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px; }
+  margin-bottom: 24px;
+  height: auto; }
 
 .add-item {
   min-width: 47px;
@@ -290,6 +296,8 @@ body {
   font-size: 24px;
   opacity: .8;
   transition: opacity .15s ease-in-out; }
+  .add-item.toggleForm {
+    background-color: #d0d2d9; }
   .add-item:hover {
     opacity: 1; }
 
@@ -383,16 +391,24 @@ textarea {
   /* remove arrow IE     */ }
 
 .db-item {
-  padding: 0 30px 0 40px; }
+  padding: 0 30px 0 40px;
+  height: auto; }
+
+.db-table {
+  display: flex;
+  flex-direction: column;
+  height: 100%; }
 
 .db-table-content-box {
-  max-height: 250px;
+  max-height: 80vh;
   overflow: auto;
   margin-bottom: 50px;
   position: relative;
   padding-right: 5px;
   /* Track */
   /* Handle */ }
+  .db-table-content-box.toggleForm {
+    max-height: 250px; }
   .db-table-content-box::-webkit-scrollbar {
     width: 6px !important; }
   .db-table-content-box::-webkit-scrollbar-track {
@@ -416,12 +432,16 @@ textarea {
   font-size: 14px;
   color: #B1B3BD;
   margin-right: 15px; }
+  .db-table-header .db-col {
+    min-height: auto; }
 
 .db-row-content {
   min-height: 61px;
   background-color: #fff;
   border-radius: 3px;
   margin-bottom: 16px; }
+  .db-row-content:hover .delete-company {
+    opacity: 1; }
   .db-row-content:last-of-type {
     margin-bottom: 0px; }
 
@@ -430,7 +450,8 @@ textarea {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 100%; }
+  width: 100%;
+  min-height: 52px; }
   .db-col:first-of-type {
     max-width: 370px; }
   .db-col:nth-of-type(2) {
@@ -492,17 +513,26 @@ textarea {
   min-height: 19px;
   color: #67686E; }
 
+.delete-company {
+  margin: auto 0 0 auto;
+  color: #8E8E8E;
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+  cursor: pointer; }
+
 .form-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start; }
 
-.form .form-wrapper {
-  background: #FFFFFF;
-  border-radius: 3px;
-  padding: 14px 0 0;
-  max-width: 900px;
-  margin: 0 auto; }
+.form {
+  height: auto; }
+  .form .form-wrapper {
+    background: #FFFFFF;
+    border-radius: 3px;
+    padding: 14px 0 0;
+    max-width: 900px;
+    margin: 0 auto; }
 
 .form-container-col {
   width: 410px;

@@ -1,10 +1,17 @@
 (function () {
     'use strict';
 
-    function AppCtrl($scope, $rootScope, $filter, $timeout, $http, $compile) {
+    function AppCtrl($scope, $rootScope, $filter, $timeout, $http, $compile, $anchorScroll, $location) {
 
         $scope.tagsContainerShow = false;
         $scope.tagsAddShow = true;
+        $scope.formVisible = false;
+
+        $scope.showForm = function () {
+            $scope.formVisible = !$scope.formVisible;
+        }
+
+
 
         angular.element(document).on('click', function (e) {
             if ($scope.tagsContainerShow) {
@@ -13,9 +20,13 @@
                 }, 1);
             }
         });
-        angular.element(document).on('click','.choosen-tag-del', function (e) {
+        angular.element(document).on('click', '.choosen-tag-del', function (e) {
             angular.element(e.target).parent().remove();
         });
+        angular.element(document).on('click', '.delete-company', function (e) {
+            angular.element(e.target).parents('.db-row-content').remove();
+        });
+
 
         $scope.showTagsContainer = function () {
             $timeout(function () {
@@ -37,7 +48,7 @@
                 url: 'http://summit.icreations.agency/db_source/tags.php'
             }).then(function (response) {
                 $scope.new_tag = response.data;
-                var new_tag_item_html = '<div class="choosen-tag" tag-id="'+$scope.new_tag.id+'"><span>'+$scope.new_tag.name+'</span><div class="choosen-tag-del"></div></div>';
+                var new_tag_item_html = '<div class="choosen-tag" tag-id="' + $scope.new_tag.id + '"><span>' + $scope.new_tag.name + '</span><div class="choosen-tag-del"></div></div>';
                 angular.element(document.querySelector('.inp-tags-result')).append($compile(new_tag_item_html)($scope));
                 $scope.searchTags = null;
                 $scope.tagsContainerShow = false;
@@ -47,7 +58,7 @@
         };
 
         $scope.addTagToForm = function (value, id) {
-            var tag_item_html = '<div class="choosen-tag" tag-id="'+id+'"><span>'+value+'</span><div class="choosen-tag-del"></div></div>';
+            var tag_item_html = '<div class="choosen-tag" tag-id="' + id + '"><span>' + value + '</span><div class="choosen-tag-del"></div></div>';
             angular.element(document.querySelector('.inp-tags-result')).append($compile(tag_item_html)($scope));
             $scope.tagsContainerShow = false;
             $scope.searchTags = null;
@@ -75,26 +86,67 @@
         });
 
 
-        $scope.save = function ($event, company, companyForm){
+        $scope.save = function ($event, company, companyForm) {
             $event.preventDefault();
-            // if(companyForm.$valid){
-            //     console.log(company.title);
-            //     console.log(company.site);
-            //     console.log(company.country);
-            //     console.log(company.email);
-            //     console.log(company.desc);
-            //     console.log(company);
-            // company.tags =
-            //     function () {
-                    angular.forEach(angular.element(document.querySelector('.choosen-tag')), function(value, key){
-                        // var a = angular.element(value);
-                        // a.addClass('ss');
-                        console.log(value);
-                        console.log(key);
-                    });
-                // }
-            // }
+            var tags_arr = [];
+            company.tags = (function () {
+                angular.forEach(angular.element($('.choosen-tag')), function (item, key) {
+                    return tags_arr[key] = item.attributes['tag-id'].value;
+                });
+                return tags_arr.join(',')
+            })();
+
+            var send_company = JSON.stringify(company);
+
+
+            $http({
+                method: 'post',
+                data: send_company,
+                url: 'http://summit.icreations.agency/db_source/contacts.php'
+            }).then(function (response) {
+                $scope.new_company_id = response.data;
+                ClearMyForm($event, company)
+                angular.element(document.querySelector('.db-table-content-box')).scrollTop(0);
+                $http({
+                    method: 'get',
+                    url: 'http://summit.icreations.agency/db_source/contacts.php?get=one&id=' + $scope.new_company_id
+                }).then(function (response) {
+                    $scope.new_company = response.data;
+                    var new_company_html = '<div class="db-row db-row-content" company-id="'+$scope.new_company.id+'" > <div class="db-col"> <div class="db-item-header"><a href="'+$scope.new_company.site+'" target="_blank">'+$scope.new_company.title+'</a></div> <div class="subdivisions"> <div class="sd-it">приложение</div> <div class="sd-it">управление</div> <div class="sd-it">ферма</div> <div class="sd-it">аналитика</div> <div class="sd-it">агро</div> </div> </div> <div class="db-col"> <div class="company-email"> <svg class="icon-svg-email"> <use xlink:href="img/sprite.svg#email" xmlns:xlink="http:/*www.w3.org/1999/xlink"></use>*/ </svg> <span>'+$scope.new_company.email+'</span> </div> <div class="company-project">'+$scope.new_company.type+'</div> </div> <div class="db-col"> <div class="company-country">'+$scope.new_company.country+'</div> <div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div> </div> </div>';
+                    angular.element(document.querySelector('.db-table-content-box')).prepend($compile(new_company_html)($scope));
+                }, function (error) {
+                    console.log(error);
+                });
+
+
+            }, function (error) {
+                console.log(error);
+            });
         };
+
+        $scope.clearForm = function ($event, company, companyForm) {
+            ClearMyForm($event, company)
+        };
+
+        $http({
+            method: 'get',
+            url: 'http://summit.icreations.agency/db_source/contacts.php?get=all'
+        }).then(function (response) {
+            $scope.companyList = response.data;
+            console.log($scope.companyList);
+        }, function (error) {
+            console.log(error);
+        });
+
+
+
+        function ClearMyForm(event, company) {
+            event.preventDefault();
+            angular.copy({}, company);
+            angular.element(document.querySelector('.inp-tags-result')).html('');
+        };
+
+
     };
 
     AppCtrl.$inject = ['$scope', '$rootScope', '$filter', '$timeout', '$http', '$compile'];

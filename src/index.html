@@ -24,7 +24,7 @@
 <body ng-controller="AppCtrl">
 <div class="content">
 	<section class="top">
-		<button class="add-item">+</button>
+		<button class="add-item" ng-click="showForm()" ng-class="{'toggleForm': formVisible}">+</button>
 		<input class="top-search" type="text" placeholder="Search"/>
 		<div class="top-select">
 			<select name="select_filter_tags" id="select_filter_tags" placeholder="By Tags">
@@ -56,10 +56,10 @@
 				<div class="db-col">Email</div>
 				<div class="db-col">Country</div>
 			</div>
-			<div class="db-table-content-box">
-				<div class="db-row db-row-content">
+			<div class="db-table-content-box" ng-class="{'toggleForm': formVisible}">
+				<div class="db-row db-row-content" ng-repeat="company in companyList" company-id="{{company.id}}" >
 					<div class="db-col">
-						<div class="db-item-header">socialrocket</div>
+						<div class="db-item-header"><a href="{{company.site}}" target="_blank">{{company.title}}</a></div>
 						<div class="subdivisions">
 							<div class="sd-it">приложение</div>
 							<div class="sd-it">управление</div>
@@ -73,115 +73,20 @@
 							<svg class="icon-svg-email">
 								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
 							</svg>
-							<span>guru@socialrocket.com.br</span>
+							<span>{{company.email}}</span>
 						</div>
-						<div class="company-project">Приложение: управление фермой</div>
+						<div class="company-project">{{company.type}}</div>
 					</div>
 					<div class="db-col">
-						<div class="company-country">Великобритания</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content">
-					<div class="db-col">
-						<div class="db-item-header">socialrocket</div>
-						<div class="subdivisions">
-							<div class="sd-it">приложение</div>
-							<div class="sd-it">управление</div>
-							<div class="sd-it">ферма</div>
-							<div class="sd-it">аналитика</div>
-							<div class="sd-it">агро</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span>guru@socialrocket.com.br</span>
-						</div>
-						<div class="company-project">Приложение: управление фермой</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">Великобритания</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content">
-					<div class="db-col">
-						<div class="db-item-header">socialrocket</div>
-						<div class="subdivisions">
-							<div class="sd-it">приложение</div>
-							<div class="sd-it">управление</div>
-							<div class="sd-it">ферма</div>
-							<div class="sd-it">аналитика</div>
-							<div class="sd-it">агро</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span>guru@socialrocket.com.br</span>
-						</div>
-						<div class="company-project">Приложение: управление фермой</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">Великобритания</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content">
-					<div class="db-col">
-						<div class="db-item-header">socialrocket</div>
-						<div class="subdivisions">
-							<div class="sd-it">приложение</div>
-							<div class="sd-it">управление</div>
-							<div class="sd-it">ферма</div>
-							<div class="sd-it">аналитика</div>
-							<div class="sd-it">агро</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span>guru@socialrocket.com.br</span>
-						</div>
-						<div class="company-project">Приложение: управление фермой</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">Великобритания</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content">
-					<div class="db-col">
-						<div class="db-item-header">socialrocket</div>
-						<div class="subdivisions">
-							<div class="sd-it">приложение</div>
-							<div class="sd-it">управление</div>
-							<div class="sd-it">ферма</div>
-							<div class="sd-it">аналитика</div>
-							<div class="sd-it">агро</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span>guru@socialrocket.com.br</span>
-						</div>
-						<div class="company-project">Приложение: управление фермой</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">Великобритания</div>
+						<div class="company-country">{{company.country}}</div>
+						<div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div>
 					</div>
 				</div>
 			</div>
 
 		</div>
 	</section>
-	<section class="form">
+	<section class="form" ng-show="formVisible">
 		<div class="form-wrapper">
 			<form action="" name="companyForm">
 				<div class="form-container">
@@ -208,7 +113,7 @@
 				</div>
 				<div class="form-btns">
 					<button class="form-add" type="submit" ng-click="save($event, company, companyForm)">add & next</button>
-					<button class="form-cancel">cancel</button>
+					<button class="form-cancel" type="submit" ng-click="clearForm($event, company, companyForm)">cancel</button>
 				</div>
 			</form>
 		</div>
