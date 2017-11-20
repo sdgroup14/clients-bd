@@ -4,6 +4,7 @@
     function AppCtrl($scope, $rootScope, $filter, $timeout, $http, $compile, $anchorScroll, $location) {
 
         $scope.tagsContainerShow = false;
+        $scope.titleContainerShow = false;
         $scope.tagsAddShow = true;
         $scope.formVisible = false;
 
@@ -20,12 +21,33 @@
                 }, 1);
             }
         });
+
+        angular.element(document).on('click', function (e) {
+            if ($scope.titleContainerShow) {
+                $timeout(function () {
+                    $scope.titleContainerShow = false;
+                }, 1);
+            }
+        });
+
+
         angular.element(document).on('click', '.choosen-tag-del', function (e) {
             angular.element(e.target).parent().remove();
         });
         angular.element(document).on('click', '.delete-company', function (e) {
             angular.element(e.target).parents('.db-row-content').remove();
         });
+        $scope.clipboardCopy = function () {
+          // this.company.email;
+          // this.company.email
+	        // document.execCommand('copy');
+	        var tmpInput = $('<input>');
+	        tmpInput.val(this.company.email);
+	        $('body').append(tmpInput);
+	        tmpInput.select();
+	        document.execCommand('copy');
+	        tmpInput.remove();
+        }
 
 
         $scope.showTagsContainer = function () {
@@ -33,6 +55,14 @@
                 $scope.tagsContainerShow = true;
             }, 1);
         };
+
+        $scope.showTitleContainer = function () {
+            $timeout(function () {
+                $scope.titleContainerShow = true;
+            }, 1);
+        };
+
+
 
         var _query;
 
@@ -84,6 +114,28 @@
                 return false
             }
         });
+        $scope.$watch("company.title", function (query) {
+	        // http://summit.icreations.agency/db_source/contacts.php?get=title&word=словодляпоиска
+
+	        _query = query;
+	        if (!query) {
+	            $scope.titleContainerShow = false;
+	        } else if (query) {
+	            $scope.titleContainerShow = true;
+	            $http({
+	                method: 'get',
+	                url: 'http://summit.icreations.agency/db_source/contacts.php?get=title&word=' + _query
+	            }).then(function (response) {
+	                $scope.titles = response.data;
+	                console.log($scope.titles);
+	            }, function (error) {
+	                console.log(error);
+	            });
+	        } else {
+	            return false
+	        }
+        });
+
 
 
         $scope.save = function ($event, company, companyForm) {
@@ -118,7 +170,7 @@
                     console.log(error);
                 });
 
-
+	            "[{'id':33,'name':'софт'},{'id':37,'name':'разработчики'}]"
             }, function (error) {
                 console.log(error);
             });

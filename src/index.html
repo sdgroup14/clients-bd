@@ -61,11 +61,8 @@
 					<div class="db-col">
 						<div class="db-item-header"><a href="{{company.site}}" target="_blank">{{company.title}}</a></div>
 						<div class="subdivisions">
-							<div class="sd-it">приложение</div>
-							<div class="sd-it">управление</div>
-							<div class="sd-it">ферма</div>
-							<div class="sd-it">аналитика</div>
-							<div class="sd-it">агро</div>
+							<div class="sd-it" ng-repeat="tag in company.tags" tag-id="{{tag.id}}">{{tag.name}}</div>
+
 						</div>
 					</div>
 					<div class="db-col">
@@ -73,7 +70,7 @@
 							<svg class="icon-svg-email">
 								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
 							</svg>
-							<span>{{company.email}}</span>
+							<span ng-click="clipboardCopy()">{{company.email}}</span>
 						</div>
 						<div class="company-project">{{company.type}}</div>
 					</div>
@@ -91,8 +88,13 @@
 			<form action="" name="companyForm">
 				<div class="form-container">
 					<div class="form-container-col">
-						<input type="text" name="Title" placeholder="Title" ng-model="company.title"/>
-						<input type="text" name="Title" placeholder="Site" ng-model="company.site"/>
+						<div class="title-inp-wrapper">
+							<input type="text" name="Title" placeholder="Title" ng-model="company.title" autocomplete="off"/>
+							<div class="dropdown-title" ng-show="titleContainerShow">
+								<div class="dropdown-title-it" ng-repeat="item in titles | filter:company.title">{{item.title}}</div>
+							</div>
+						</div>
+						<input type="text" name="Site" placeholder="Site" ng-model="company.site"/>
 						<div class="f-container-common">
 							<div class="tag-inp-wrapper">
 								<input type="text" name="Title" id="" placeholder="Tags" class="search-tags-inp" ng-model="searchTags" ng-click="showTagsContainer()" autocomplete="off"/>

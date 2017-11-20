@@ -62,7 +62,7 @@ body {
 	justify-content: flex-start;
 	//align-items: flex-start;
 	align-content: flex-start;
-	height: 100%;
+	height: auto;
 	
 }
 
@@ -200,28 +200,18 @@ textarea {
 	background: transparent;
 	border: 0;
 	outline: 0;
-	appearance: none; /* remove arrow        */
-	-webkit-appearance: none; /* remove arrow Chrome */
-	appearance: none; /* remove arrow FF     */
+	-webkit-appearance: none;
 	font-family: Arial;
 	font-size: 16px;
 	color: #B5B7C2;
-	
-	//&:focus ~ .select-arr {
-	//	transform: rotate(180deg);
-	//}
-	//&:not(:focus) ~ .select-arr {
-	//	transform: rotate(0deg);
-	//}
 }
 
 .top-select select::-ms-expand {
-	display: none; /* remove arrow IE     */
+	display: none;
 }
 
 .db-item {
 	padding: 0 30px 0 40px;
-	//flex: 1 0 auto;
 	height: auto;
 }
 
@@ -232,11 +222,10 @@ textarea {
 }
 
 .db-table-content-box {
-	max-height: 80vh;
+	max-height: 75vh;
 	overflow: auto;
 	margin-bottom: 50px;
 	position: relative;
-	//padding: 0 30px 0 40px;
 	padding-right: 5px;
 	
 	&.toggleForm {
@@ -247,13 +236,11 @@ textarea {
 		width: 6px !important;
 	}
 	
-	/* Track */
 	&::-webkit-scrollbar-track {
 		background-color: rgba(230, 232, 240, 1) !important;
 		border-radius: 10px !important;
 	}
 	
-	/* Handle */
 	&::-webkit-scrollbar-thumb {
 		border-radius: 10px !important;
 		background: rgba(172, 173, 180, 1) !important;
@@ -297,7 +284,7 @@ textarea {
 	}
 	
 	&:last-of-type {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 }
 
@@ -367,6 +354,13 @@ textarea {
 		font-family: Arial;
 		font-size: 12px;
 		color: #67686E;
+		transition: opacity .1s ease-in-out;
+		opacity: .7;
+		cursor: pointer;
+		
+		&:hover {
+			opacity: 1;
+		}
 	}
 }
 
@@ -378,7 +372,6 @@ textarea {
 }
 
 .company-country {
-	min-height: 18px;
 	font-size: 16px;
 	min-height: 19px;
 	color: #67686E;
@@ -447,9 +440,6 @@ textarea {
 	border-radius: 3px;
 	height: 19px;
 	padding: 0 4px 0 7px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	margin: 0 5px 5px 0;
 	background-color: #E6E8F0;
 	display: flex;
@@ -473,10 +463,6 @@ textarea {
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	//position: absolute;
-	//right: 5px;
-	//top: 50%;
-	//transform: translateY(-50%);
 	&:after, &:before {
 		position: absolute;
 		top: 50%;
@@ -492,43 +478,27 @@ textarea {
 	
 	&:after {
 		transform: translate(-50%, -50%) rotate(45deg);
-		//margin-right:-1px;
 	}
 	&:before {
 		transform: translate(-50%, -50%) rotate(-45deg);
-		//margin-left:-1px;
 	}
 }
 
-.tag-inp-wrapper {
+.tag-inp-wrapper, .title-inp-wrapper {
 	position: relative;
 	margin-bottom: 12px;
-	
-	//margin: 0 0 0 20px;
 	border: 1px solid #d5d7e3;
 	border-radius: 3px;
 	min-height: 36px;
-	//background-color: #fff;
-	//padding: 0 20px 0 7px;
-	//font-family: Arial;
-	//font-size: 16px;
-	//color: #838590;
-	//overflow: hidden;
 	
 	input {
 		margin-bottom: 0;
 		border: 0;
 		border-radius: 0;
-		
-		//&:focus {
-		//	& + .dropdown-tags {
-		//		display: block;
-		//	}
-		//}
 	}
 }
 
-.dropdown-tags {
+.dropdown-tags, .dropdown-title {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -538,13 +508,11 @@ textarea {
 	max-height: 175px;
 	overflow: hidden;
 	border: 1px solid #d5d7e3;
-	//display: none;
 	border-radius: 3px;
 }
 
-.dropdown-tags-it {
+.dropdown-tags-it, .dropdown-title-it {
 	position: relative;
-	//border: 1px solid #d5d7e3;
 	height: 35px;
 	display: flex;
 	align-items: center;
@@ -558,7 +526,6 @@ textarea {
 	&:hover {
 		background-color: #d5d7e3;
 		color: #fff;
-		
 	}
 	
 	&:before {
@@ -573,7 +540,14 @@ textarea {
 	}
 }
 
-.dropdown-tags-add {
+.dropdown-title-it {
+	padding-left: 7px;
+	&:before {
+		display: none;
+	}
+}
+
+.dropdown-tags-add, .dropdown-title-add {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -587,7 +561,6 @@ textarea {
 	color: #ffffff;
 	cursor: pointer;
 	padding: 0 10px;
-	//display: none;
 }
 
 .form-btns {
@@ -619,4 +592,3 @@ textarea {
 	background-color: #83c98a;
 }
 
-//@import "content/templates/header";
