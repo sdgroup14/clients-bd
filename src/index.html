@@ -59,12 +59,35 @@
 			<div class="db-table-content-box" ng-class="{'toggleForm': formVisible}">
 				<div class="db-row db-row-content" ng-repeat="company in companyList" company-id="{{company.id}}" >
 					<div class="db-col">
-						<div class="db-item-types-wrapper" ng-class="{'grey': !company.label}" data-type-name="{{company.label.name}}" data-type-id="{{company.label.id}}" style="background-color: #{{company.label.color}};"">
-							<div class="db-item-types">{{getFirstChar(company.label.name)}}</div>
-							<div class="db-item-types-dropdown">
+						<div class="db-item-types-wrapper"
+						     ng-class="{'grey': !company.label}"
+						     data-type-name="{{company.label.name}}"
+						     data-type-id="{{company.label.id}}"
+						     ng-style="{'background-color': '#{{company.label.color}}'}">
+							<div class="db-item-types" ng-click="expand(company)">{{getFirstChar(company.label.name)}}</div>
+							<div class="db-item-types-dropdown" ng-show="company.showfull">
 								<div class="db-item-types-dropdown-content">
 									<form action="">
-										<div class="types-radio-item" ng-click="getRadio()" ng-repeat="label in companyLabels"><input type="radio" name="type" id="type-radio-{{label.id}}" value="{{label.name}}"/><label for="type-radio-{{label.id}}">{{label.name}}</label></div>
+										<div class="types-radio-item" ng-click="getRadio()" ng-repeat="label in companyLabels" ng-model="company.label.color">
+											<input
+													type="radio"
+													ng-click="getDataLabel()"
+													name="type"
+
+													id="type-radio-{{company.label.id}}-{{label.id}}"
+													d-id="{{label.id}}"
+													d-color="{{label.color}}"
+													d-parent-id="{{company.id}}"
+													value="{{label.name}}"
+													ng-model="company.label.name"
+											/>
+											<label
+													ng-click="expand(company)"
+													for="type-radio-{{company.label.id}}-{{label.id}}"
+													data-color="{{label.color}}"
+													ng-style="{'background-color': '#{{label.color}}'}"
+											>{{label.name}}</label>
+										</div>
 									</form>
 								</div>
 							</div>

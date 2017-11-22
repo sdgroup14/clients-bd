@@ -462,10 +462,10 @@ textarea {
   border-radius: 4px;
   z-index: 1; }
   .db-item-types-wrapper.grey {
-    background: rgba(230, 232, 240, 0.7);
+    background: rgba(230, 232, 240, 0.7) !important;
     cursor: pointer; }
     .db-item-types-wrapper.grey:hover {
-      background: #e6e8f0; }
+      background: #e6e8f0 !important; }
 
 .db-item-types {
   position: relative;
@@ -511,25 +511,30 @@ textarea {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 23px;
+  height: 28px;
   font-size: 13px;
   font-family: Arial;
   font-weight: normal;
-  margin-bottom: 8px;
-  cursor: pointer;
-  padding: 0 8px; }
+  cursor: pointer; }
   .types-radio-item:hover {
     background-color: #e6e8f0;
     color: #ffffff; }
   .types-radio-item:last-of-type {
     margin-bottom: 0; }
   .types-radio-item label {
-    line-height: 1;
-    white-space: nowrap; }
+    line-height: 28px;
+    white-space: nowrap;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 0 8px;
+    color: #000000; }
   .types-radio-item input {
     width: auto;
     height: auto;
-    margin-right: 4px; }
+    margin-right: 4px;
+    cursor: pointer;
+    display: none; }
 
 .db-item-header {
   font-family: Arial;
@@ -590,6 +595,9 @@ textarea {
   color: #67686E; }
 
 .delete-company {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
   margin: auto 0 0 auto;
   color: #8E8E8E;
   opacity: 0;

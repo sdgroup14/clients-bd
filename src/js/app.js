@@ -6,31 +6,32 @@
         $scope.tagsContainerShow = false;
         $scope.titleContainerShow = false;
         // $scope.typeContainerHide= true;
-	    // $scope.typeContainerShow = false;
-	    // $favourite = false;
-	    //
+        // $scope.typeContainerShow = false;
+        // $favourite = false;
+        //
 
-      // $scope.hideTypeContainer = function () {
-	     //  $scope.typeContainerHide= true;
-      // }
-      // $scope.showTypeContainer = function (e) {
-	     //  $scope.typeContainerShow= true;
-      // }
+        // $scope.hideTypeContainer = function () {
+        //  $scope.typeContainerHide= true;
+        // }
+        // $scope.showTypeContainer = function (e) {
+        //  $scope.typeContainerShow= true;
+        // }
 
-	    // $scope.divShow = "db-item-types-dropdown-";
+        // $scope.divShow = "db-item-types-dropdown-";
 
-	    // $scope.show = function(arg) {
-		   //  // $scope.divShow = $scope.divShow + arg;
-		   //  console.log($scope.divShow + arg);
-		   //  return 'db-item-types-dropdown-' + arg
-	    // }
+        // $scope.show = function(arg) {
+        //  // $scope.divShow = $scope.divShow + arg;
+        //  console.log($scope.divShow + arg);
+        //  return 'db-item-types-dropdown-' + arg
+        // }
 
-	    // $scope.favorite = function(data) {
-		   //  //use $http or $resource to update the data in backend
-		   //  //for example if you used $resource service
-		   //  // data.favorite = !data.favorite;
-		   //  // data.$save();
-	    // };
+        // $scope.favorite = function(data) {
+        //  //use $http or $resource to update the data in backend
+        //  //for example if you used $resource service
+        //  // data.favorite = !data.favorite;
+        //  // data.$save();
+        // };
+
 
         $scope.tagsAddShow = true;
         $scope.formVisible = false;
@@ -40,8 +41,8 @@
         }
 
         // $('body').on('click', '.db-item-types-wrapper', function () {
-	       //  $('.db-item-types-dropdown').hide();
-		     //    $(this).find('.db-item-types-dropdown').show();
+        //  $('.db-item-types-dropdown').hide();
+        //    $(this).find('.db-item-types-dropdown').show();
         // });
 
 // $('body').on('click', '.types-radio-item', function () {
@@ -52,20 +53,41 @@
 //         });
 
 
+        // $(document).on('click', function(e) {
+        //    if (!e.target.closest('.db-item-types-wrapper')) {
+        //     $('.db-item-types-dropdown').css('display','none');
+        //    }
+        // });
 
+        $scope.selectedLabelColor = function (company, label) {
 
-	    $(document).on('click', function(e) {
-		    if (!e.target.closest('.db-item-types-wrapper')) {
-			    $('.db-item-types-dropdown').css('display','none');
-		    }
-	    });
-
-
-
-
-        $scope.getRadio = function () {
-
+            if (company !== null) {
+                if (company.color == label.color) {
+                    return 'ffffff'
+                }
+            }
         };
+        $scope.selectedLabelBgColor = function (company, label) {
+
+            if (company !== null) {
+                if (company.color == label.color) {
+                    return label.color
+                }
+            }
+        };
+        // $scope.clickedLabelBgColor = function (company, label) {
+        //
+        //     if(company !== null) {
+        //         if(company.color == label.color) {
+        //             console.log(company);
+        //             console.log(label);
+        //             return label.color
+        //         }
+        //     }
+        // };
+
+
+
 
         angular.element(document).on('click', function (e) {
             if ($scope.tagsContainerShow) {
@@ -84,13 +106,12 @@
 
 
         // angular.element(document).on('click', function (e) {
-        //     if ($scope.typeContainerShow) {
-        //         $timeout(function () {
-        //             $scope.typeContainerShow = false;
-        //         }, 1);
-        //     }
+        //     // if ($scope.typeContainerShow) {
+        //     //     angular.forEach($scope.companyList, function (currentItem) {
+        //     //         currentItem.showfull = currentItem === item && !currentItem.showfull;
+        //     //     });
+        //     // }
         // });
-
 
 
 
@@ -112,15 +133,15 @@
             angular.element(e.target).parents('.db-row-content').remove();
         });
         $scope.clipboardCopy = function () {
-          // this.company.email;
-          // this.company.email
-	        // document.execCommand('copy');
-	        var tmpInput = $('<input>');
-	        tmpInput.val(this.company.email);
-	        $('body').append(tmpInput);
-	        tmpInput.select();
-	        document.execCommand('copy');
-	        tmpInput.remove();
+            // this.company.email;
+            // this.company.email
+            // document.execCommand('copy');
+            var tmpInput = $('<input>');
+            tmpInput.val(this.company.email);
+            $('body').append(tmpInput);
+            tmpInput.select();
+            document.execCommand('copy');
+            tmpInput.remove();
         }
 
 
@@ -131,14 +152,11 @@
         };
 
 
-
-
         $scope.showTitleContainer = function () {
             $timeout(function () {
                 $scope.titleContainerShow = true;
             }, 1);
         };
-
 
 
         var _query;
@@ -192,27 +210,26 @@
             }
         });
         $scope.$watch("company.title", function (query) {
-	        // http://summit.icreations.agency/db_source/contacts.php?get=title&word=словодляпоиска
+            // http://summit.icreations.agency/db_source/contacts.php?get=title&word=словодляпоиска
 
-	        _query = query;
-	        if (!query) {
-	            $scope.titleContainerShow = false;
-	        } else if (query) {
-	            $scope.titleContainerShow = true;
-	            $http({
-	                method: 'get',
-	                url: 'http://summit.icreations.agency/db_source/contacts.php?get=title&word=' + _query
-	            }).then(function (response) {
-	                $scope.titles = response.data;
-	                console.log($scope.titles);
-	            }, function (error) {
-	                console.log(error);
-	            });
-	        } else {
-	            return false
-	        }
+            _query = query;
+            if (!query) {
+                $scope.titleContainerShow = false;
+            } else if (query) {
+                $scope.titleContainerShow = true;
+                $http({
+                    method: 'get',
+                    url: 'http://summit.icreations.agency/db_source/contacts.php?get=title&word=' + _query
+                }).then(function (response) {
+                    $scope.titles = response.data;
+                    console.log($scope.titles);
+                }, function (error) {
+                    console.log(error);
+                });
+            } else {
+                return false
+            }
         });
-
 
 
         $scope.save = function ($event, company, companyForm) {
@@ -241,13 +258,13 @@
                     url: 'http://summit.icreations.agency/db_source/contacts.php?get=one&id=' + $scope.new_company_id
                 }).then(function (response) {
                     $scope.new_company = response.data;
-                    var new_company_html = '<div class="db-row db-row-content" company-id="'+$scope.new_company.id+'" > <div class="db-col"> <div class="db-item-header"><a href="'+$scope.new_company.site+'" target="_blank">'+$scope.new_company.title+'</a></div> <div class="subdivisions"> <div class="sd-it">приложение</div> <div class="sd-it">управление</div> <div class="sd-it">ферма</div> <div class="sd-it">аналитика</div> <div class="sd-it">агро</div> </div> </div> <div class="db-col"> <div class="company-email"> <svg class="icon-svg-email"> <use xlink:href="img/sprite.svg#email" xmlns:xlink="http:/*www.w3.org/1999/xlink"></use>*/ </svg> <span>'+$scope.new_company.email+'</span> </div> <div class="company-project">'+$scope.new_company.type+'</div> </div> <div class="db-col"> <div class="company-country">'+$scope.new_company.country+'</div> <div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div> </div> </div>';
+                    var new_company_html = '<div class="db-row db-row-content" company-id="' + $scope.new_company.id + '" > <div class="db-col"> <div class="db-item-header"><a href="' + $scope.new_company.site + '" target="_blank">' + $scope.new_company.title + '</a></div> <div class="subdivisions"> <div class="sd-it">приложение</div> <div class="sd-it">управление</div> <div class="sd-it">ферма</div> <div class="sd-it">аналитика</div> <div class="sd-it">агро</div> </div> </div> <div class="db-col"> <div class="company-email"> <svg class="icon-svg-email"> <use xlink:href="img/sprite.svg#email" xmlns:xlink="http:/*www.w3.org/1999/xlink"></use>*/ </svg> <span>' + $scope.new_company.email + '</span> </div> <div class="company-project">' + $scope.new_company.type + '</div> </div> <div class="db-col"> <div class="company-country">' + $scope.new_company.country + '</div> <div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div> </div> </div>';
                     angular.element(document.querySelector('.db-table-content-box')).prepend($compile(new_company_html)($scope));
                 }, function (error) {
                     console.log(error);
                 });
 
-	            // "[{'id':33,'name':'софт'},{'id':37,'name':'разработчики'}]"
+                // "[{'id':33,'name':'софт'},{'id':37,'name':'разработчики'}]"
             }, function (error) {
                 console.log(error);
             });
@@ -262,16 +279,40 @@
             url: 'http://summit.icreations.agency/db_source/contacts.php?get=all'
         }).then(function (response) {
             $scope.companyList = response.data;
-	        console.log($scope.companyList);
-          $scope.getFirstChar = function (str) {
-	          var new_str;
-            if(str){
-	            new_str = str.substr(-999,2)
-            } else {
-	            new_str = "KO";
-            }
-	          return new_str
-          }
+            console.log($scope.companyList);
+            $scope.getFirstChar = function (str) {
+                var new_str;
+                if (str) {
+                    new_str = str.substr(-999, 2)
+                } else {
+                    new_str = "KO";
+                }
+                return new_str
+            };
+
+            // $scope.getFirstChar = function (color) {
+            //     var new_color = color;
+            //     return new_color
+            // };
+
+
+            $scope.expand = function (item) {
+
+                angular.forEach($scope.companyList, function (currentItem) {
+                    currentItem.showfull = currentItem === item && !currentItem.showfull;
+                });
+            };
+
+            // $scope.bodyHideLabels = function () {
+            //     $timeout(function () {
+            //         angular.forEach($scope.companyList, function (currentItem) {
+            //             currentItem.showfull = false;
+            //         });
+            //     },1111)
+            //
+            //
+            // }
+
         }, function (error) {
             console.log(error);
         });
@@ -282,6 +323,54 @@
             url: 'http://summit.icreations.agency/db_source/labels.php?get=all'
         }).then(function (response) {
             $scope.companyLabels = response.data;
+            // $('body').on('click', '.types-radio-item', function () {
+
+                angular.element(document).on('click', '.types-radio-item', function ($event) {
+                    $event.stopPropagation();
+                //     'backgroundColor': 'transparent',
+                //     'color': '#000000'
+                // });
+                $(this).closest('.db-item-types-dropdown-content').find('.types-radio-item').css({
+                    'backgroundColor': 'transparent',
+                    'color': '#000000'
+                });
+                // console.log(e);
+                // console.log(e.target.parentElement);
+                // $(this).css('backgroundColor', '#' + $(this).find('label').attr('data-color'));
+                $(this).closest('.db-item-types-wrapper').css('backgroundColor', '#' + $(this).find('label').attr('data-color'));
+
+                // console.log($(this).find('label').attr('data-color'));
+                // $(this).find('input').attr('value');
+                // $(this).find('input').attr('label-color');
+                // console.log($(this).closest('.db-row-content').attr('company-id'));
+                var label_data = {
+                    contact_id: $(this).find('input').attr('d-parent-id'),
+                    label_id: $(this).find('input').attr('d-id'),
+                    label_name: $(this).find('input').attr('value'),
+                    label_color: $(this).find('input').attr('d-color')
+                };
+                console.log(label_data);
+
+
+                // var send_label_data = JSON.stringify(label_data);
+                // $http({
+                //     method: 'post',
+                //     data: send_label_data,
+                //     url: 'http://summit.icreations.agency/db_source/labels.php'
+                // }).then(function (response) {
+                //     // console.log(response);
+                //     label_data = null;
+                //     send_label_data = null;
+                //     console.log(company);
+                //
+                //
+                // }, function (error) {
+                //     console.log(error);
+                // });
+
+
+            });
+
 
 
         }, function (error) {
@@ -289,11 +378,40 @@
         });
 
 
-
         function ClearMyForm(event, company) {
             event.preventDefault();
             angular.copy({}, company);
             angular.element(document.querySelector('.inp-tags-result')).html('');
+        };
+
+        $scope.getDataLabel = function (company, label) {
+            console.log(this);
+            // var label_data = {
+            //     contact_id: company.id,
+            //     label_id: label.id,
+            //     label_name: label.name,
+            //     label_color: label.color
+            // };
+            // console.log(this);
+            // console.log(company);
+            // console.log(company);
+            // label_data = null;
+            // console.log(label_data);
+            // var send_label_data = JSON.stringify(label_data);
+            // $http({
+            //     method: 'post',
+            //     data: send_label_data,
+            //     url: 'http://summit.icreations.agency/db_source/labels.php'
+            // }).then(function (response) {
+            //     // console.log(response);
+            //     label_data = null;
+            //     send_label_data = null;
+            //     console.log(company);
+            //
+            //
+            // }, function (error) {
+            //     console.log(error);
+            // });
         };
 
 
