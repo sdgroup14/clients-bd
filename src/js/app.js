@@ -5,6 +5,7 @@
 
         $scope.tagsContainerShow = false;
         $scope.titleContainerShow = false;
+        $scope.typeContainerShow = false;
         $scope.tagsAddShow = true;
         $scope.formVisible = false;
 
@@ -12,7 +13,14 @@
             $scope.formVisible = !$scope.formVisible;
         }
 
+        // $('.db-item-types-affirm').on('click', function () {
+        //   $(this).find('.db-item-types-dropdown').toggle();
+        // });
 
+
+        $scope.getRadio = function () {
+          console.log('123');
+        };
 
         angular.element(document).on('click', function (e) {
             if ($scope.tagsContainerShow) {
@@ -21,6 +29,16 @@
                 }, 1);
             }
         });
+
+        angular.element(document).on('click', function (e) {
+            if ($scope.typeContainerShow) {
+                $timeout(function () {
+                    $scope.typeContainerShow = false;
+                }, 1);
+            }
+        });
+
+
 
         angular.element(document).on('click', function (e) {
             if ($scope.titleContainerShow) {
@@ -55,6 +73,12 @@
                 $scope.tagsContainerShow = true;
             }, 1);
         };
+        $scope.showTypeContainer = function () {
+            $timeout(function () {
+                $scope.typeContainerShow = true;
+            }, 1);
+        };
+
 
         $scope.showTitleContainer = function () {
             $timeout(function () {
@@ -185,10 +209,22 @@
             url: 'http://summit.icreations.agency/db_source/contacts.php?get=all'
         }).then(function (response) {
             $scope.companyList = response.data;
-            console.log($scope.companyList);
         }, function (error) {
             console.log(error);
         });
+
+
+        $http({
+            method: 'get',
+            url: 'http://summit.icreations.agency/db_source/labels.php?get=all'
+        }).then(function (response) {
+            $scope.companyLabels = response.data;
+            console.log($scope.companyLabels);
+        }, function (error) {
+            console.log(error);
+        });
+
+
 
 
 

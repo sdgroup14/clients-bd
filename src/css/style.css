@@ -423,7 +423,7 @@ textarea {
   font-family: Arial;
   font-size: 14px;
   color: #B1B3BD;
-  margin-right: 15px; }
+  margin-right: 5px; }
   .db-table-header .db-col {
     min-height: auto; }
 
@@ -431,7 +431,8 @@ textarea {
   min-height: 61px;
   background-color: #fff;
   border-radius: 3px;
-  margin-bottom: 16px; }
+  margin-bottom: 16px;
+  position: relative; }
   .db-row-content:hover .delete-company {
     opacity: 1; }
   .db-row-content:last-of-type {
@@ -445,11 +446,81 @@ textarea {
   width: 100%;
   min-height: 52px; }
   .db-col:first-of-type {
-    max-width: 370px; }
+    max-width: 370px;
+    padding-left: 30px; }
   .db-col:nth-of-type(2) {
     max-width: 255px; }
   .db-col:last-of-type {
     max-width: 190px; }
+
+.db-item-types-wrapper {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 30px;
+  border-radius: 4px;
+  z-index: 1; }
+  .db-item-types-wrapper.grey {
+    background-color: rgba(230, 232, 240, 0.7);
+    cursor: pointer; }
+    .db-item-types-wrapper.grey:hover {
+      background-color: #e6e8f0; }
+
+.db-item-types {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  z-index: 1; }
+  .db-item-types:after {
+    display: block;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    border: 8px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom: 0; }
+
+.db-item-types-dropdown {
+  position: absolute;
+  top: 100%;
+  margin-top: 2px;
+  left: 0;
+  width: auto;
+  background-color: #ffffff;
+  z-index: 99;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+  padding: 8px; }
+
+.db-item-types-dropdown-content {
+  position: relative;
+  z-index: 100; }
+
+.types-radio-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 13px;
+  font-family: Arial;
+  font-weight: normal;
+  margin-bottom: 8px; }
+  .types-radio-item label {
+    line-height: 1;
+    white-space: nowrap; }
+  .types-radio-item input {
+    width: auto;
+    height: auto;
+    margin-right: 4px; }
 
 .db-item-header {
   font-family: Arial;
