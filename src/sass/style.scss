@@ -318,12 +318,15 @@ textarea {
 	width: 30px;
 	border-radius: 4px;
 	z-index:1;
+	//pointer-events: none;
 	
 	&.grey {
-		background-color: rgba(230, 232, 240, .7);
+		//pointer-events: auto;
+		
+		background: rgba(230, 232, 240, .7);
 		cursor: pointer;
 		&:hover {
-			background-color: rgba(230, 232, 240, 1);
+			background: rgba(230, 232, 240, 1);
 		}
 	}
 }
@@ -340,6 +343,7 @@ textarea {
 	font-size: 16px;
 	color: #ffffff;
 	z-index: 1;
+	cursor: pointer;
 	
 	&:after {
 		display: block;
@@ -356,9 +360,10 @@ textarea {
 
 .db-item-types-dropdown {
 	position: absolute;
-	top: 100%;
+	top: 0%;
 	margin-top: 2px;
-	left: 0;
+	margin-left: 2px;
+	left: 100%;
 	width:auto;
 	//width: 100px;
 	//height: 100px;
@@ -366,7 +371,8 @@ textarea {
 	z-index: 99;
 	border-radius: 4px;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
-	padding: 8px;
+	//padding: 8px;
+	//display: none;
 }
 
 .db-item-types-dropdown-content {
@@ -378,10 +384,21 @@ textarea {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	height: 23px;
 	font-size: 13px;
 	font-family: Arial;
 	font-weight: normal;
 	margin-bottom: 8px;
+	cursor: pointer;
+	padding: 0 8px;
+	&:hover {
+		background-color: rgba(230, 232, 240, 1);
+		color: #ffffff;
+	}
+	
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 	
 	label {
 		line-height: 1;

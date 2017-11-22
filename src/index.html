@@ -57,23 +57,21 @@
 				<div class="db-col">Country</div>
 			</div>
 			<div class="db-table-content-box" ng-class="{'toggleForm': formVisible}">
-				<div class="db-row db-row-content" company-id="123123213213" >
+				<div class="db-row db-row-content" ng-repeat="company in companyList" company-id="{{company.id}}" >
 					<div class="db-col">
-						<div class="db-item-types-wrapper db-item-types-affirm db-item-types-empty grey">
-							<div class="db-item-types">KO</div>
+						<div class="db-item-types-wrapper" ng-class="{'grey': !company.label}" data-type-name="{{company.label.name}}" data-type-id="{{company.label.id}}" style="background-color: #{{company.label.color}};"">
+							<div class="db-item-types">{{getFirstChar(company.label.name)}}</div>
 							<div class="db-item-types-dropdown">
 								<div class="db-item-types-dropdown-content">
 									<form action="">
-										<input type="radio" name="" id="" value="123"/>
-										button
+										<div class="types-radio-item" ng-click="getRadio()" ng-repeat="label in companyLabels"><input type="radio" name="type" id="type-radio-{{label.id}}" value="{{label.name}}"/><label for="type-radio-{{label.id}}">{{label.name}}</label></div>
 									</form>
-
 								</div>
 							</div>
 						</div>
-						<div class="db-item-header"><a href="213231" target="_blank">123213</a></div>
+						<div class="db-item-header"><a href="{{company.site}}" target="_blank">{{company.title}}</a></div>
 						<div class="subdivisions">
-							<div class="sd-it" tag-id="231213">213213</div>
+							<div class="sd-it" ng-repeat="tag in company.tags" tag-id="{{tag.id}}">{{tag.name}}</div>
 						</div>
 					</div>
 					<div class="db-col">
@@ -81,79 +79,15 @@
 							<svg class="icon-svg-email">
 								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
 							</svg>
-							<span ng-click="clipboardCopy()">123213</span>
+							<span ng-click="clipboardCopy()">{{company.email}}</span>
 						</div>
-						<div class="company-project">123213</div>
+						<div class="company-project">{{company.type}}</div>
 					</div>
 					<div class="db-col">
-						<div class="company-country">123213</div>
+						<div class="company-country">{{company.country}}</div>
 						<div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div>
 					</div>
 				</div>
-				<div class="db-row db-row-content" company-id="123123213213" >
-					<div class="db-col">
-						<div class="db-item-header"><a href="213231" target="_blank">123213</a></div>
-						<div class="subdivisions">
-							<div class="sd-it" tag-id="231213">213213</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span ng-click="clipboardCopy()">123213</span>
-						</div>
-						<div class="company-project">123213</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">123213</div>
-						<div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content" company-id="123123213213" >
-					<div class="db-col">
-						<div class="db-item-header"><a href="213231" target="_blank">123213</a></div>
-						<div class="subdivisions">
-							<div class="sd-it" tag-id="231213">213213</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span ng-click="clipboardCopy()">123213</span>
-						</div>
-						<div class="company-project">123213</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">123213</div>
-						<div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div>
-					</div>
-				</div>
-				<div class="db-row db-row-content" company-id="123123213213" >
-					<div class="db-col">
-						<div class="db-item-header"><a href="213231" target="_blank">123213</a></div>
-						<div class="subdivisions">
-							<div class="sd-it" tag-id="231213">213213</div>
-						</div>
-					</div>
-					<div class="db-col">
-						<div class="company-email">
-							<svg class="icon-svg-email">
-								<use xlink:href="img/sprite.svg#email" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
-							</svg>
-							<span ng-click="clipboardCopy()">123213</span>
-						</div>
-						<div class="company-project">123213</div>
-					</div>
-					<div class="db-col">
-						<div class="company-country">123213</div>
-						<div class="delete-company" ng-click="removeItem(companyList, company)">удалить</div>
-					</div>
-				</div>
-
 			</div>
 
 		</div>

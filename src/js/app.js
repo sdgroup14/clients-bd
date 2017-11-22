@@ -5,7 +5,33 @@
 
         $scope.tagsContainerShow = false;
         $scope.titleContainerShow = false;
-        $scope.typeContainerShow = false;
+        // $scope.typeContainerHide= true;
+	    // $scope.typeContainerShow = false;
+	    // $favourite = false;
+	    //
+
+      // $scope.hideTypeContainer = function () {
+	     //  $scope.typeContainerHide= true;
+      // }
+      // $scope.showTypeContainer = function (e) {
+	     //  $scope.typeContainerShow= true;
+      // }
+
+	    // $scope.divShow = "db-item-types-dropdown-";
+
+	    // $scope.show = function(arg) {
+		   //  // $scope.divShow = $scope.divShow + arg;
+		   //  console.log($scope.divShow + arg);
+		   //  return 'db-item-types-dropdown-' + arg
+	    // }
+
+	    // $scope.favorite = function(data) {
+		   //  //use $http or $resource to update the data in backend
+		   //  //for example if you used $resource service
+		   //  // data.favorite = !data.favorite;
+		   //  // data.$save();
+	    // };
+
         $scope.tagsAddShow = true;
         $scope.formVisible = false;
 
@@ -13,13 +39,32 @@
             $scope.formVisible = !$scope.formVisible;
         }
 
-        // $('.db-item-types-affirm').on('click', function () {
-        //   $(this).find('.db-item-types-dropdown').toggle();
+        // $('body').on('click', '.db-item-types-wrapper', function () {
+	       //  $('.db-item-types-dropdown').hide();
+		     //    $(this).find('.db-item-types-dropdown').show();
         // });
+
+// $('body').on('click', '.types-radio-item', function () {
+// 	        // $('.db-item-types-dropdown').hide();
+// 	$timeout(function () {
+// 		$('.db-item-types-dropdown').hide();
+// 	}, 1);
+//         });
+
+
+
+
+	    $(document).on('click', function(e) {
+		    if (!e.target.closest('.db-item-types-wrapper')) {
+			    $('.db-item-types-dropdown').css('display','none');
+		    }
+	    });
+
+
 
 
         $scope.getRadio = function () {
-          console.log('123');
+
         };
 
         angular.element(document).on('click', function (e) {
@@ -30,13 +75,22 @@
             }
         });
 
-        angular.element(document).on('click', function (e) {
-            if ($scope.typeContainerShow) {
-                $timeout(function () {
-                    $scope.typeContainerShow = false;
-                }, 1);
-            }
-        });
+
+// angular.element(document).on('click', function (e) {
+//                 $timeout(function () {
+//                     $('.')
+//                 }, 1);
+//         });
+
+
+        // angular.element(document).on('click', function (e) {
+        //     if ($scope.typeContainerShow) {
+        //         $timeout(function () {
+        //             $scope.typeContainerShow = false;
+        //         }, 1);
+        //     }
+        // });
+
 
 
 
@@ -52,6 +106,8 @@
         angular.element(document).on('click', '.choosen-tag-del', function (e) {
             angular.element(e.target).parent().remove();
         });
+
+
         angular.element(document).on('click', '.delete-company', function (e) {
             angular.element(e.target).parents('.db-row-content').remove();
         });
@@ -73,11 +129,8 @@
                 $scope.tagsContainerShow = true;
             }, 1);
         };
-        $scope.showTypeContainer = function () {
-            $timeout(function () {
-                $scope.typeContainerShow = true;
-            }, 1);
-        };
+
+
 
 
         $scope.showTitleContainer = function () {
@@ -194,7 +247,7 @@
                     console.log(error);
                 });
 
-	            "[{'id':33,'name':'софт'},{'id':37,'name':'разработчики'}]"
+	            // "[{'id':33,'name':'софт'},{'id':37,'name':'разработчики'}]"
             }, function (error) {
                 console.log(error);
             });
@@ -209,6 +262,16 @@
             url: 'http://summit.icreations.agency/db_source/contacts.php?get=all'
         }).then(function (response) {
             $scope.companyList = response.data;
+	        console.log($scope.companyList);
+          $scope.getFirstChar = function (str) {
+	          var new_str;
+            if(str){
+	            new_str = str.substr(-999,2)
+            } else {
+	            new_str = "KO";
+            }
+	          return new_str
+          }
         }, function (error) {
             console.log(error);
         });
@@ -219,12 +282,11 @@
             url: 'http://summit.icreations.agency/db_source/labels.php?get=all'
         }).then(function (response) {
             $scope.companyLabels = response.data;
-            console.log($scope.companyLabels);
+
+
         }, function (error) {
             console.log(error);
         });
-
-
 
 
 

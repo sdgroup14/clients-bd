@@ -462,10 +462,10 @@ textarea {
   border-radius: 4px;
   z-index: 1; }
   .db-item-types-wrapper.grey {
-    background-color: rgba(230, 232, 240, 0.7);
+    background: rgba(230, 232, 240, 0.7);
     cursor: pointer; }
     .db-item-types-wrapper.grey:hover {
-      background-color: #e6e8f0; }
+      background: #e6e8f0; }
 
 .db-item-types {
   position: relative;
@@ -478,7 +478,8 @@ textarea {
   font-weight: bold;
   font-size: 16px;
   color: #ffffff;
-  z-index: 1; }
+  z-index: 1;
+  cursor: pointer; }
   .db-item-types:after {
     display: block;
     position: absolute;
@@ -492,15 +493,15 @@ textarea {
 
 .db-item-types-dropdown {
   position: absolute;
-  top: 100%;
+  top: 0%;
   margin-top: 2px;
-  left: 0;
+  margin-left: 2px;
+  left: 100%;
   width: auto;
   background-color: #ffffff;
   z-index: 99;
   border-radius: 4px;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
-  padding: 8px; }
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35); }
 
 .db-item-types-dropdown-content {
   position: relative;
@@ -510,10 +511,18 @@ textarea {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 23px;
   font-size: 13px;
   font-family: Arial;
   font-weight: normal;
-  margin-bottom: 8px; }
+  margin-bottom: 8px;
+  cursor: pointer;
+  padding: 0 8px; }
+  .types-radio-item:hover {
+    background-color: #e6e8f0;
+    color: #ffffff; }
+  .types-radio-item:last-of-type {
+    margin-bottom: 0; }
   .types-radio-item label {
     line-height: 1;
     white-space: nowrap; }
