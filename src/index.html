@@ -57,36 +57,16 @@
 				<div class="db-col">Country</div>
 			</div>
 			<div class="db-table-content-box" ng-class="{'toggleForm': formVisible}">
-				<div class="db-row db-row-content" ng-repeat="company in companyList" company-id="{{company.id}}" >
+				<div class="db-row db-row-content" ng-repeat="company in companyList" company-id="{{company.id}}">
 					<div class="db-col">
-						<div class="db-item-types-wrapper"
-						     ng-class="{'grey': !company.label}"
-						     data-type-name="{{company.label.name}}"
-						     data-type-id="{{company.label.id}}"
-						     ng-style="{'background-color': '#{{company.label.color}}'}">
+						<div class="db-item-types-wrapper" ng-class="{'grey': !company.label}" data-type-name="{{company.label.name}}" data-type-id="{{company.label.id}}" ng-style="{'background-color': '#{{company.label.color}}'}">
 							<div class="db-item-types" ng-click="expand(company)">{{getFirstChar(company.label.name)}}</div>
 							<div class="db-item-types-dropdown" ng-show="company.showfull">
 								<div class="db-item-types-dropdown-content">
 									<form action="">
-										<div class="types-radio-item" ng-click="getRadio()" ng-repeat="label in companyLabels" ng-model="company.label.color">
-											<input
-													type="radio"
-													ng-click="getDataLabel()"
-													name="type"
-
-													id="type-radio-{{company.label.id}}-{{label.id}}"
-													d-id="{{label.id}}"
-													d-color="{{label.color}}"
-													d-parent-id="{{company.id}}"
-													value="{{label.name}}"
-													ng-model="company.label.name"
-											/>
-											<label
-													ng-click="expand(company)"
-													for="type-radio-{{company.label.id}}-{{label.id}}"
-													data-color="{{label.color}}"
-													ng-style="{'background-color': '#{{label.color}}'}"
-											>{{label.name}}</label>
+										<div class="types-radio-item" ng-click="getDataLabel(company, label, company)" ng-repeat="label in companyLabels track by $index" ng-model="company.label.name">
+											<input type="radio" name="type" id="type-radio-{{company.label.id}}-{{label.id}}" d-id="{{label.id}}" d-color="{{label.color}}" d-parent-id="{{company.id}}" value="{{label.name}}"/>
+											<div data-color="{{label.color}}" ng-style="{'background-color': '#{{label.color}}'}">{{label.name}}</div>
 										</div>
 									</form>
 								</div>
@@ -135,14 +115,11 @@
 									<div class="dropdown-tags-it" ng-click="addTagToForm(tag.name, tag.id)" ng-repeat="tag in tags | filter:searchTags" tag-id="{{tag.id}}">{{tag.name}}</div>
 								</div>
 							</div>
-							<div class="inp-tags-result">
-							</div>
+							<div class="inp-tags-result"></div>
 						</div>
 					</div>
 					<div class="form-container-col">
-						<input type="text" name="Title" id="" placeholder="Country" ng-model="company.country"/>
-						<input type="text" name="Title" id="" placeholder="Email" ng-model="company.email"/>
-						<textarea name="" id="" cols="" rows="" placeholder="About" ng-model="company.desc"></textarea>
+						<input type="text" name="Title" id="" placeholder="Country" ng-model="company.country"/> <input type="text" name="Title" id="" placeholder="Email" ng-model="company.email"/> <textarea name="" id="" cols="" rows="" placeholder="About" ng-model="company.desc"></textarea>
 					</div>
 				</div>
 				<div class="form-btns">

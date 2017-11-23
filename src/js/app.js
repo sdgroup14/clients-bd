@@ -271,7 +271,8 @@
         };
 
         $scope.clearForm = function ($event, company, companyForm) {
-            ClearMyForm($event, company)
+            ClearMyForm($event, company);
+	        $scope.formVisible = false;
         };
 
         $http({
@@ -318,55 +319,19 @@
         });
 
 
+     // $scope.hideThis = true;
+
         $http({
             method: 'get',
             url: 'http://summit.icreations.agency/db_source/labels.php?get=all'
         }).then(function (response) {
             $scope.companyLabels = response.data;
-            // $('body').on('click', '.types-radio-item', function () {
 
-                angular.element(document).on('click', '.types-radio-item', function ($event) {
-                    $event.stopPropagation();
-                //     'backgroundColor': 'transparent',
-                //     'color': '#000000'
-                // });
-                $(this).closest('.db-item-types-dropdown-content').find('.types-radio-item').css({
-                    'backgroundColor': 'transparent',
-                    'color': '#000000'
-                });
-                // console.log(e);
-                // console.log(e.target.parentElement);
-                // $(this).css('backgroundColor', '#' + $(this).find('label').attr('data-color'));
-                $(this).closest('.db-item-types-wrapper').css('backgroundColor', '#' + $(this).find('label').attr('data-color'));
-
-                // console.log($(this).find('label').attr('data-color'));
-                // $(this).find('input').attr('value');
-                // $(this).find('input').attr('label-color');
-                // console.log($(this).closest('.db-row-content').attr('company-id'));
-                var label_data = {
-                    contact_id: $(this).find('input').attr('d-parent-id'),
-                    label_id: $(this).find('input').attr('d-id'),
-                    label_name: $(this).find('input').attr('value'),
-                    label_color: $(this).find('input').attr('d-color')
-                };
-                console.log(label_data);
-
-
-                // var send_label_data = JSON.stringify(label_data);
-                // $http({
-                //     method: 'post',
-                //     data: send_label_data,
-                //     url: 'http://summit.icreations.agency/db_source/labels.php'
-                // }).then(function (response) {
-                //     // console.log(response);
-                //     label_data = null;
-                //     send_label_data = null;
-                //     console.log(company);
-                //
-                //
-                // }, function (error) {
-                //     console.log(error);
-                // });
+                angular.element(document).on('click', '.types-radio-item', function () {
+                $(this).closest('.db-item-types-wrapper').css('backgroundColor', '#' + $(this).find('div').attr('data-color'));
+	                var str =$(this).text();
+                $(this).closest('.db-item-types-wrapper').find('.db-item-types').text($.trim(str).substr(-999, 2));
+                $(this).closest('.db-item-types-wrapper').find('.db-item-types').text($.trim(str).substr(-999, 2));
 
 
             });
@@ -382,36 +347,32 @@
             event.preventDefault();
             angular.copy({}, company);
             angular.element(document.querySelector('.inp-tags-result')).html('');
+
         };
 
-        $scope.getDataLabel = function (company, label) {
-            console.log(this);
-            // var label_data = {
-            //     contact_id: company.id,
-            //     label_id: label.id,
-            //     label_name: label.name,
-            //     label_color: label.color
-            // };
-            // console.log(this);
-            // console.log(company);
-            // console.log(company);
-            // label_data = null;
-            // console.log(label_data);
-            // var send_label_data = JSON.stringify(label_data);
-            // $http({
-            //     method: 'post',
-            //     data: send_label_data,
-            //     url: 'http://summit.icreations.agency/db_source/labels.php'
-            // }).then(function (response) {
-            //     // console.log(response);
-            //     label_data = null;
-            //     send_label_data = null;
-            //     console.log(company);
-            //
-            //
-            // }, function (error) {
-            //     console.log(error);
-            // });
+        $scope.getDataLabel = function (company, label, item) {
+            var label_data = {
+                contact_id: company.id,
+                label_id: label.id,
+                label_name: label.name,
+                label_color: label.color
+            };
+            var send_label_data = JSON.stringify(label_data);
+            $http({
+                method: 'post',
+                data: send_label_data,
+                url: 'http://summit.icreations.agency/db_source/labels.php'
+            }).then(function (response) {
+                console.log(response);
+	              console.log(label_data);
+
+	            angular.forEach($scope.companyList, function (currentItem) {
+		            currentItem.showfull = currentItem === item && !currentItem.showfull;
+	            });
+
+            }, function (error) {
+                console.log(error);
+            });
         };
 
 
